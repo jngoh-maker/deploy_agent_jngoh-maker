@@ -15,4 +15,19 @@ initialize_system() {
     mkdir "${workspace_name}/Helpers" "${workspace_name}/reports"
 
     echo "Created sub-directories for the project"
+    echo "Starting to move the source files to the workspace"
+
+    cp "source/attendnace_checker.py" "$workspace_name/"
+    cp "source/assets.csv" "$workspace_name/Helpers"
+    cp "source/config.json" "$workspace_name/Helpers"
+    cp "source/reports.log" "$workspace_name/reports"
+
+    echo "Successfully moved all source files"
+
+    thresholds_configuration
+    
+}
+
+thresholds_configuration() {
+    echo "UPDATING ATTENDANCE MARKS THRESHOLDS"
 }
