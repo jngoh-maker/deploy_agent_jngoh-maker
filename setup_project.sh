@@ -1,5 +1,7 @@
 #!/bin/bash
 
+trap user_interupt SIGINT
+
 initialize_system() {
     echo "Student Attendance Tracker system deploy agent"
     read -p "Please provide the workspace name: " name
@@ -92,4 +94,22 @@ environment_validator() {
 	echo "reports.log is present"
     fi
     
+}
+
+user_interupt() {
+    echo "USER INTERUPTED THE PROCESS"
+    echo "Archiving your current progress.."
+
+    if [ ! -d "$workspace_name" ]; then
+	echo "The workspace doesnt exist to be archived"
+	exit 0
+    fi
+
+    tar -czf "archive_$workspace_name" "$workspace_name"
+
+    echo "Archive created successfully, now removing the incomplete workspace"
+    rm -rf "$workspace_name"
+
+    echo "Archiving completed. Now exiting"
+    exit 0
 }
