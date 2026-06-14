@@ -38,12 +38,19 @@ dynamic_configuration() {
 	read -p "Please specify the new warning percentage: " warning
 	read -p "Please specify the new failure percentage: " failure
 
-	sed -Ei \
-	    -e 's|("warning": )[0-9]+|\1'"$warning"'|' \
-	    -e 's|("failure": )[0-9]+|\1'"$failure"'|' \
-	    "$workspace_name/Helpers/config.json"
-
-	echo "New thresholds set: $warning for Warning & $failure for Failure"
+	if [[ ! "$warning" =~ ^[0-9]+$ ]]; then
+	    echo "Warning threshold must be a number."
+	    dynamic_configuration
+	elif [[ ! "$failure" =~ ^[0-9]+$ ]]; then
+	    echo "Failure threshold must be a number."
+	    dynamic_configuration
+	else
+	    sed -Ei \
+		-e 's|("warning": )[0-9]+|\1'"$warning"'|' \
+		-e 's|("failure": )[0-9]+|\1'"$failure"'|' \
+		"$workspace_name/Helpers/config.json"
+	    echo "New thresholds set: $warning for Warning & $failure for Failure"
+	fi
     else
 	echo "Default thresholds used: 75% for Warning & 50% for Failure"
     fi
