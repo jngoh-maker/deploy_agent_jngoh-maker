@@ -19,7 +19,7 @@ initialize_system() {
     echo "Created sub-directories for the project"
     echo "Starting to move the source files to the workspace"
 
-    cp "source/attendnace_checker.py" "$workspace_name/"
+    cp "source/attendance_checker.py" "$workspace_name/"
     cp "source/assets.csv" "$workspace_name/Helpers"
     cp "source/config.json" "$workspace_name/Helpers"
     cp "source/reports.log" "$workspace_name/reports"
@@ -113,3 +113,5 @@ user_interupt() {
     echo "Archiving completed. Now exiting"
     exit 0
 }
+
+initialize_system
