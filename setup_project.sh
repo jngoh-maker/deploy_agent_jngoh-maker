@@ -24,10 +24,25 @@ initialize_system() {
 
     echo "Successfully moved all source files"
 
-    thresholds_configuration
+    dynamic_configuration
     
 }
 
-thresholds_configuration() {
+dynamic_configuration() {
     echo "UPDATING ATTENDANCE MARKS THRESHOLDS"
+    read -p "Do you want to update the thresholds(y,n)? " update
+
+    if [[ "$update" == "y" ]]; then
+	read -p "Please specify the new warning percentage: " warning
+	read -p "Please specify the new failure percentage: " failure
+
+	sed -Ei \
+	    -e 's|("warning": )[0-9]+|\1'"$warning"'|' \
+	    -e 's|("failure": )[0-9]+|\1'"$failure"'|' \
+	    "$workspace_name/Helpers/config.json"
+
+	echo "New thresholds set: $warning for Warning & $failure for Failure"
+    else
+	echo "Default thresholds used: 75% for Warning & 50% for Failure"
+    fi
 }
