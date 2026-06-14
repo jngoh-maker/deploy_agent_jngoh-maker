@@ -11,13 +11,17 @@ This repository contains a script that orchestrates the project structure of an 
 ## How to run instructions
 
 1. Clone this repository
+
 git clone https://github.com/jngoh-maker/deploy_agent_jngoh-maker
+
 cd deploy_agent_jnghoh-maker
 
 2. Grant the execute permission to the script
+
 chmod 755 setup_project.sh
 
 3. Run the script
+
 ./setup_script.sh
 
 4. Follow the prompts, so that the script creates you the workspace
