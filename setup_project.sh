@@ -45,4 +45,51 @@ dynamic_configuration() {
     else
 	echo "Default thresholds used: 75% for Warning & 50% for Failure"
     fi
+
+    environment_validator
+}
+
+environment_validator() {
+    echo "WORKSPACE ENVIRONMENT VALIDATION"
+
+    echo "Checking if Python 3 is installed..."
+
+    if version=$(python3 --version 2>/dev/null); then
+        echo "Python has been found on your system ($version)"
+    else
+        echo "Python is missing on your system"
+    fi
+
+    echo "checking if all files have been created in workspace"
+
+    if [ ! -d "$workspace_name" ]; then
+	echo "The workspace($workspace_name) has not been created"
+    else
+	echo "Worksace direcotory exists"
+    fi
+
+    if [ ! -f "$workspace_name/attendance_checker.py" ]; then
+	echo "The attendance_checker.py file is missing"
+    else
+	echo "attendance_checker.py file is present"
+    fi
+
+    if [ ! -f "$workspace_name/Helpers/assets.csv" ]; then
+	echo "The assets.csv file is missing"
+    else
+	echo "assets.csv file is present"
+    fi
+
+    if [ ! -f "$workspace_name/Helpers/config.json" ]; then
+	echo "The config.json file is missing"
+    else
+	echo "config.json is present"
+    fi
+    
+    if [ ! -f "$workspace_name/reports/reports.log" ]; then
+	echo "The reports.log file is missing"
+    else
+	echo "reports.log is present"
+    fi
+    
 }
