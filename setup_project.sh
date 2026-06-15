@@ -8,6 +8,12 @@ initialize_system() {
 
     workspace_name="attendance_tracker_$name"
 
+    if [ -d $workspace_name ]; then
+	echo "$workspace_name directory already exists. In this environment"
+	exit 0
+    fi
+    
+    
     echo "Creating your workspace directory: $workspace_name"
 
     mkdir "$workspace_name"
