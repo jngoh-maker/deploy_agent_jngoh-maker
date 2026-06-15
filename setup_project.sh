@@ -118,7 +118,7 @@ user_interupt() {
 	exit 0
     fi
 
-    tar -czf "archive_$workspace_name" "$workspace_name"
+    tar -czf "archive_${workspace_name}.tar.gz" "$workspace_name"
 
     echo "Archive created successfully, now removing the incomplete workspace"
     rm -rf "$workspace_name"
